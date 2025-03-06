@@ -15,4 +15,5 @@ from django.db.models import Avg
 
     Student.objects.filter(finished_degree=True).count()
 
-    Degree.objects.all()
+    degreesVariable = Degree.objects.all()
+    degreesVariable[0].fkstudents.filter(finished_degree=True).values_list('name', 'surname')
