@@ -9,10 +9,14 @@ class Degree(models.Model):
     description = models.TextField(max_length=1500)
     numYears = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(4)])
 
+    def __str__(self):
+        return self.name
+
 class Student(models.Model):
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
-    age = models.IntegerField(validators=[MinValueValidator(1970), MaxValueValidator(2010)])
+    picture = models.ImageField(upload_to='mainApp/Students/images', null=True)
+    age = models.IntegerField(validators=[MinValueValidator(16), MaxValueValidator(55)])
     slug = models.SlugField(default='', null=False, db_index=True, unique=True)
     finished_degree = models.BooleanField(default=False)
     degree = models.ForeignKey(Degree, on_delete=models.CASCADE, related_name='fkstudents')
@@ -25,4 +29,4 @@ class Student(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.name} {self.surname}"
+        return f"{self.name} {self.surname} -- {self.degree.name}"

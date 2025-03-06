@@ -4,13 +4,15 @@ admin:
 
 sentences: 
 
-Student.objects.filter(age__ht=20)
+from mainApp.models import Degree, Student
 
-Student.objects.filter(age__ht=25, finished_degree=True)
+    Student.objects.filter(age__gt=20)
+
+    Student.objects.filter(age__gt=25, finished_degree=True)
 
 from django.db.models import Avg
-Student.objects.aggregate(Avg('age'))
+    Student.objects.aggregate(Avg('age'))
 
-Student.objects.filter(finished_degree=True).count()
+    Student.objects.filter(finished_degree=True).count()
 
-Degree.objects.all()???
+    Degree.objects.all()
