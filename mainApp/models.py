@@ -22,7 +22,7 @@ class Student(models.Model):
     degree = models.ForeignKey(Degree, on_delete=models.CASCADE, related_name='fkstudents')
 
     def get_absolute_url(self):
-        return reverse("book-detail", args=[self.slug])
+        return reverse("student-detail", args=[self.slug])
 
     def save(self, *args, **kwargs):
         self.slug = slugify(f"{self.name} {self.surname}")
